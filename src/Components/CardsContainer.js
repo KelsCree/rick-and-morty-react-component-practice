@@ -1,8 +1,11 @@
 import React from 'react'
 import Card from './Card'
 
-export default function CardsContainer({characters}) {
+export default function CardsContainer({ characters }) {
+
   return (
-    characters.map(character => <Card character={character}/>)
-  )
+    <section id="cards-container">
+      {characters.map(character => (<Card character={character}/>))}
+    </section>
+    )
 }

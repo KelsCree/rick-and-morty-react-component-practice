@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Card(props) {
+export default function Card({ character }) {
   return (
-    <div className="card">
-      <img src={props.character.image} alt="" />
-      <h3>{props.character.name}</h3>
+    <div className="card" id={character.name.replace(/ /g, '-').toLowerCase()}>
+      <img src={character.image} alt={`${character.name}`} />
+      <h3>{character.name}</h3>
     </div>
   )
 }
