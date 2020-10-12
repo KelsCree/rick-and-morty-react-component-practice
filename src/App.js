@@ -2,12 +2,14 @@ import React from 'react';
 import './App.css';
 import CardsContainer from './Components/CardsContainer'
 import SearchCharacterForm from './Components/SearchCharacterForm'
+import Favorites from './Components/Favorites.js'
 
 class App extends React.Component {
   state = {
     allCharacters: [],
     selectedCharacters: [],
-    inputValue: ''
+    inputValue: '',
+    favorites: []
   }
 
   componentDidMount() {
@@ -26,13 +28,28 @@ class App extends React.Component {
     this.setState({ selectedCharacters: filteredCharacters })
   }
 
+  removeFavorite = (character) => {
+    let favorites = this.state.favorites.filter(favorite => favorite !== character)
+    this.setState({ favorites })
+  }
+
+  addToFavorites = (character) => {
+    let foundCharacter = this.state.favorites.find(favorite => character.id === favorite.id)
+    if(!foundCharacter){
+      this.setState({
+        favorites: [...this.state.favorites, character]
+      })
+    }
+  }
+
   render() {
     const {selectedCharacters} = this.state
     return (
       <div className="App">
         <h1>Dammit Morty</h1>
         < SearchCharacterForm filterCharacters={this.filterCharacters}/>
-        < CardsContainer characters={selectedCharacters}/>
+        <Favorites clickAction={this.removeFavorite} favorites={this.state.favorites}/>
+        < CardsContainer clickAction={this.addToFavorites} characters={selectedCharacters}/>
       </div>
   );
   }

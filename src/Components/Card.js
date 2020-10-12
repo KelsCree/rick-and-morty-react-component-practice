@@ -1,9 +1,14 @@
 import React from 'react'
 
-export default function Card({ character }) {
+export default function Card({ character, clickAction }) {
+
+  function handleClick(){
+    clickAction(character)
+  }
+
   return (
     <div className="card" id={character.name.replace(/ /g, '-').toLowerCase()}>
-      <img src={character.image} alt={`${character.name}`} />
+      <img onClick={handleClick} src={character.image} alt={`${character.name}`} />
       <h3>{character.name}</h3>
     </div>
   )
